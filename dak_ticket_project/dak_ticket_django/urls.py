@@ -20,7 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('dak_ticket.urls')),
+    path('accounts/', include('dak_ticket.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))    
 ]
 
