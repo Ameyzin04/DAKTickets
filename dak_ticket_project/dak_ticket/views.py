@@ -1,11 +1,28 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout,get_user_model
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 # Create your views here.
 from rest_framework import generics
-from .serializers import EventSerializer,VenueSerializer
+from .serializers import EventSerializer,VenueSerializer,CustomUserSerializer
 from .models import Event,Venue,CustomUser
+from rest_framework import viewsets
 
+
+
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+
+@api_view(['POST'])
+def user_registration(request):
+    serializer = CustomUserSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()
+        return Response({'message': 'User registered successfully', 'user_id': user.id})
+    else:
+        return Response(serializer.errors, status=400)
 
 @api_view(['POST'])
 def user_login(request):
@@ -19,22 +36,9 @@ def user_login(request):
         return Response({'message': 'Invalid credentials'}, status=401)
 
 @api_view(['POST'])
-def user_signup(request):
-    email = request.data.get('email')
-    password = request.data.get('password')
-    first_name = request.data.get('first_name')
-    last_name = request.data.get('last_name')
-    user = CustomUser.objects.create_user(email=email, password=password, first_name=first_name, last_name=last_name)
-    if user is not None:
-        return Response({'message': 'Signup successful'})
-    else:
-        return Response({'message': 'Signup failed'}, status=400)
-
-@api_view(['POST'])
 def user_logout(request):
     logout(request)
     return Response({'message': 'Logout successful'})
-
 
 class EventList(generics.ListCreateAPIView):
     queryset = Event.objects.all()

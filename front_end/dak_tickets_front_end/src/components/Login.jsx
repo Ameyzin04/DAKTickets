@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const UserLogin = ({ setLoggedIn ,setUsername,setUserId }) => {
+const Login = ({ setLoggedIn ,setUsername,setUserId }) => {
     const [user, setUser] = useState({
         username: '',
         password: '',
@@ -21,7 +21,7 @@ const UserLogin = ({ setLoggedIn ,setUsername,setUserId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3001/users/login', {
+            const response = await fetch('http://localhost:8000/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,4 +91,4 @@ const UserLogin = ({ setLoggedIn ,setUsername,setUserId }) => {
     );
 };
 
-export default UserLogin;
+export default Login;

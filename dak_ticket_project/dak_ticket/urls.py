@@ -10,7 +10,7 @@ urlpatterns = [
     path('venue/', views.VenueList.as_view(), name='venue_list'),
     path('venue/<int:pk>/', views.VenueDetail.as_view(), name='venue_detail'),
     path('login/', views.user_login, name='login'),
-    path('signup/', views.user_signup, name='signup'),
+    path('signup/', views.user_registration, name='signup'),
     path('logout/', views.user_logout, name='logout'),
 
 ]
