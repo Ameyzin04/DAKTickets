@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import '../style/UserSignup.css';
+import '../style/Registration.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
 
-const UserSignup = () => {
+const Registration = () => {
 
     const navigate = useNavigate();
     
@@ -30,7 +30,7 @@ const UserSignup = () => {
 
         try {
 
-            const response = await fetch('http://localhost:3001/users/signup', {
+            const response = await fetch('http://localhost:8000/api/signup', {
 
 
 
@@ -144,4 +144,4 @@ const UserSignup = () => {
     );
 };
 
-export default UserSignup;
+export default Registration;
