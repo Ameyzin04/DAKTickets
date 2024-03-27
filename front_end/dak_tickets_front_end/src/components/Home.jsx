@@ -1,98 +1,78 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../style/Home.css";
 
-
-export default function Home() {
-  const [sports, setSports] = useState([]);
-  const [concerts, setConcerts] = useState([]);
-  const [ads, setAds] = useState([]);
+const Home = () => {
+  const [events, setEvents] = useState([]);
+  const [venues, setVenues] = useState([]);
 
   const navigate = useNavigate();
+  let showEvent = (id) => {
+    navigate(`sport/${id}`);
+  };
+
+  let showVenue = (id) => {
+    navigate(`/concert/${id}`);
+  };
 
   useEffect(() => {
-    const getSports = async () => {
-      const response = await axios.get(`http://localhost:8000/api/event`);
-      setSports(response.data);
+    const fetchEvents = async () => {
+      const response = await axios.get("http://localhost:8000/event/");
+      setEvents(response.data);
     };
-    getSports();
 
-    const getConcerts = async () => {
-      const response = await axios.get("http://localhost:8000/api/venue");
-      setConcerts(response.data);
+    const fetchVenues = async () => {
+      const response = await axios.get("http://localhost:8000/venue/");
+      setVenues(response.data);
     };
-    getConcerts();
 
-    const getAds = async () => {
-      const adResponse = await axios.get("http://localhost:8000/bannerAds");
-      setAds(adResponse.data);
-    };
-    getAds();
+    fetchEvents();
+    fetchVenues();
   }, []);
 
-  const showSports = (id) => {
-    navigate(`sports/${id}`);
+  const pick4RandomEvent = () => {
+    const shuffledArray = events.sort(() => 0.5 - Math.random());
+    return shuffledArray.slice(0, 4);
   };
 
-  const showConcerts = (id) => {
-    navigate(`/concerts/${id}`);
+  const pick4RandomVenue = () => {
+    const shuffledArray = venues.sort(() => 0.5 - Math.random());
+    return shuffledArray.slice(0, 4);
   };
-
-  const pick1RandomAd = () => {
-    const shuffledArray = ads.sort(() => 0.5 - Math.random());
-    return shuffledArray.slice(0, 1);
-  };
-
-  const pick4RandomSports = () => {
-    const shuffledArray = sports.sort(() => 0.5 - Math.random());
-    return shuffledArray.slice(0, 5);
-  };
-
-  const pick4RandomConcerts = () => {
-    const shuffledArray = concerts.sort(() => 0.5 - Math.random());
-    return shuffledArray.slice(0, 2);
-  };
-
   return (
-    <div>
-      <div>
-        {pick1RandomAd().map((ad, index) => (
-          <div className="home-ad-icon" key={ad._id} onClick={() => showSports(ad._id)}>
-            <img className="home-random-ad-icon-image" src={ad.img_path} alt="" />
+    <div className="home-page-container">
+      <h2>Events</h2>
+      <div className="home-random-event-container">
+        <div className="home-random-cards-container">
+        {pick4RandomEvent().map((event) => (
+          <div className="home-Event-icon" key={event.id}
+          onClick={() => showEvent(event.id)} >
+           
+           
+            <img className="home-random-event-icon-image"
+            src={event.photo_url} alt={event.name} />
+            <h3>{event.name}</h3>
           </div>
         ))}
+       </div>
       </div>
-  
-      <div>
-        {pick4RandomSports().map((event, index) => {
-          if (event.type === 'sport') {
-            return (
-              <div className="home-sport-icon" key={event._id} onClick={() => showSports(event._id)}>
-                <img className="home-random-event-icon-image" src={event.img_path} alt="" />
-                <h3>{event.name}</h3>
-              </div>
-            );
-          }
-          return null; // or an alternative if you want to skip rendering
-        })}
-      </div>
-  
-      <div>
-        {pick4RandomConcerts().map((event, index) => {
-          if (event.type === 'concert') {
-            return (
-              <div className="home-concert-icon" key={event._id} onClick={() => showConcerts(event._id)}>
-                <img className="home-random-concert-icon-image" src={event.img_path} alt="" />
-                <h3>{event.name}</h3>
-              </div>
-            );
-          }
-          return null; // or an alternative if you want to skip rendering
-        })}
-      </div>
+
+      <h2>Venues</h2>
+      <div className="home-random-venues-container">
+        <div className="home-random-cards-container">
+        {pick4RandomVenue().map((venue) => (
+          <div className="home-Venue-icon" key={venue.id}
+          onClick={() => showVenue(venue.id)} >
+            
+            <img className="home-random-venue-icon-image"
+            src={venue.photo_url} alt={venue.name} />
+            <h3>{venue.name}</h3>
+          </div>
+        ))}
+     </div>
+     </div>
     </div>
   );
-      }
+};
+
+export default Home;
