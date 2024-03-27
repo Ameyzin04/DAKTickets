@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dak_ticket',
     'rest_framework',
-    'corsheaders',
+    'corsheaders'
 ]
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -85,7 +85,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dak_ticket_django.wsgi.application'
 
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5555",
+   
+]
+CORS_ALLOW_ALL_ORIGINS = True
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173"
+]
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
