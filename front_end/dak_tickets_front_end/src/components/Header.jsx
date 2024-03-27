@@ -1,5 +1,5 @@
 import Nav from './Nav'
-import '../style/Template.css'
+import '../styles/Template.css'
 
 export default function Header() {
     return (

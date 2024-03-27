@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 
-import '../style/Template.css'
+import '../styles/Template.css'
 
 export default function Nav() {
 
