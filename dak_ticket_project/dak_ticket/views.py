@@ -1,9 +1,12 @@
-from django.shortcuts import render
 
+    
 # Create your views here.
 from rest_framework import generics
 from .serializers import EventSerializer,VenueSerializer
 from .models import Event,Venue
+
+
+
 
 class EventList(generics.ListCreateAPIView):
     queryset = Event.objects.all()
