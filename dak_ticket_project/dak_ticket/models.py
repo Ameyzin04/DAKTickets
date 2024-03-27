@@ -19,7 +19,7 @@ class Event(models.Model):
     ]
     name = models.CharField(max_length=100)
     time = models.CharField(max_length=100)
-    event_type = models.CharField(max_length=100, choices=EVENT_TYPES)
+    type = models.CharField(max_length=100, choices=EVENT_TYPES)
     duration = models.CharField(max_length=100)
     photo_url = models.URLField()
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
