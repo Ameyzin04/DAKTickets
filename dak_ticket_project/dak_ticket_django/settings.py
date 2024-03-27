@@ -44,8 +44,8 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-'DEFAULT_PERMISSION_CLASSES': [
-   'rest_framework.permissions.AllowAny',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
 ]
 }
 
@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "https://example.com",
-    "https://sub.example.com",
+    "http://127.0.0.1:8000",
     "http://localhost:5173",
     "http://127.0.0.1:5555",
 ]
@@ -100,7 +100,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dak',
-        'USER': 'dakuser_1',
+        'USER': 'dakuser',
         'PASSWORD': 'dak',
         'HOST': 'localhost'
     }
