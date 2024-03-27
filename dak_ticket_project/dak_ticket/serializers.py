@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import Event, Venue
+from .models import Event, Venue , CustomUser
+
+
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     venue = serializers.HyperlinkedRelatedField(
@@ -22,3 +24,10 @@ class VenueSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Venue
         fields = ('id', 'name', 'address', 'state', 'city', 'zip', 'capacity', 'photo_url')
+
+
+        
+class CustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'email', 'first_name', 'last_name', 'is_active', 'is_staff']
