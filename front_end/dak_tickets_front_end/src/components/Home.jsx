@@ -6,114 +6,93 @@ import { useNavigate } from "react-router-dom";
 import "../style/Home.css";
 
 
-export default function Home(){
-    const [sports,setsports]= useState([]);
-    const [concerts,setConcerts]= useState([])
-    const [ads, setAds] = useState([]);
+export default function Home() {
+  const [sports, setSports] = useState([]);
+  const [concerts, setConcerts] = useState([]);
+  const [ads, setAds] = useState([]);
 
-    const navigate = useNavigate();
-    let showSports = (id) => {
-      navigate(`sports/${id}`);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getSports = async () => {
+      const response = await axios.get(`http://localhost:8000/api/event`);
+      setSports(response.data);
     };
-  
-    let showConcerts = (id) => {
-      navigate(`/concerts/${id}`);
+    getSports();
+
+    const getConcerts = async () => {
+      const response = await axios.get("http://localhost:8000/api/venue");
+      setConcerts(response.data);
     };
+    getConcerts();
 
-    useEffect(() => {
-        const getSports = async () => {
-          const response = await axios.get(`http://localhost:8000/api/event`);
-  
-          setsports();
-        };
-        getGames();
-    
-        const getCencerts = async () => {
-            const response = await axios.get("http://localhost:8000/api/venue");
-      
-            setConcerts(response.data);
-          };
-          getCencerts();
+    const getAds = async () => {
+      const adResponse = await axios.get("http://localhost:8000/bannerAds");
+      setAds(adResponse.data);
+    };
+    getAds();
+  }, []);
 
-          const getAds = async () => {
-            const adResponse = await axios.get("http://localhost:8000/bannerAds");
-            setAds(adResponse.data);
-          };
-      
-          getAds();
-        }, []);
+  const showSports = (id) => {
+    navigate(`sports/${id}`);
+  };
 
-        const pick1RandomAd = () => {
-            const shuffledArray = ads.sort(() => 0.5 - Math.random());
-            return shuffledArray.slice(0, 1);
-          };
-    const pick4RandomSports= () => {
+  const showConcerts = (id) => {
+    navigate(`/concerts/${id}`);
+  };
+
+  const pick1RandomAd = () => {
+    const shuffledArray = ads.sort(() => 0.5 - Math.random());
+    return shuffledArray.slice(0, 1);
+  };
+
+  const pick4RandomSports = () => {
     const shuffledArray = sports.sort(() => 0.5 - Math.random());
     return shuffledArray.slice(0, 5);
   };
-    
-  const pick4RandomConcerts= () => {
+
+  const pick4RandomConcerts = () => {
     const shuffledArray = concerts.sort(() => 0.5 - Math.random());
     return shuffledArray.slice(0, 2);
   };
 
-return(
-<div>
+  return (
     <div>
+      <div>
         {pick1RandomAd().map((ad, index) => (
-            <div
-                className="home-ad-icon"
-                key={ad._id}
-                onClick={() => showSports(ad._id)}
-                >
-                <img
-                className="home-random-ad-icon-image"
-                src={ad.img_path}
-                alt=""
-                />
-            </div>
-    ))}
-    </div>   
-
-
-    <div>
-        {pick4RandomSports().map((sport, index) => (
-            <div
-                className="home-sport-icon"
-                key={sport._id}
-                onClick={() => showSports(sport._id)}
-                >
-                <img
-                className="home-random-sport-icon-image"
-                src={sport.img_path}
-                alt=""
-                />
-                <h3>{sport.title}</h3>
-            </div>
-    ))}
-    </div>   
-
-    <div>
-  {pick4RandomConcerts().map((concert, index) => (
-    <div
-      className="home-concert-icon"
-      key={concert._id}
-      onClick={() => showConcerts(concert._id)}
-    >
-      <img
-        className="home-random-concert-icon-image"
-        src={concert.img_path}
-        alt=""
-      />
-      <h3>{concert.title}</h3>
+          <div className="home-ad-icon" key={ad._id} onClick={() => showSports(ad._id)}>
+            <img className="home-random-ad-icon-image" src={ad.img_path} alt="" />
+          </div>
+        ))}
       </div>
-    ))}
-    </div>  
-
-
-
-    </div>  
-)
-
   
-  }
+      <div>
+        {pick4RandomSports().map((event, index) => {
+          if (event.type === 'sport') {
+            return (
+              <div className="home-sport-icon" key={event._id} onClick={() => showSports(event._id)}>
+                <img className="home-random-event-icon-image" src={event.img_path} alt="" />
+                <h3>{event.name}</h3>
+              </div>
+            );
+          }
+          return null; // or an alternative if you want to skip rendering
+        })}
+      </div>
+  
+      <div>
+        {pick4RandomConcerts().map((event, index) => {
+          if (event.type === 'concert') {
+            return (
+              <div className="home-concert-icon" key={event._id} onClick={() => showConcerts(event._id)}>
+                <img className="home-random-concert-icon-image" src={event.img_path} alt="" />
+                <h3>{event.name}</h3>
+              </div>
+            );
+          }
+          return null; // or an alternative if you want to skip rendering
+        })}
+      </div>
+    </div>
+  );
+      }
