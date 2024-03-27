@@ -6,6 +6,7 @@ import Main from './components/Main'
 import Footer from './components/Footer'
 
 import './App.css'
+import Home from './components/Home'
 
 function App() {
   
@@ -13,6 +14,7 @@ function App() {
   return (
     < div className='app'>
       <Header />
+    
         <Main />
       <Footer />
     </div>
