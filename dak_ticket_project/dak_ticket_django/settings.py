@@ -58,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -99,7 +100,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dak',
-        'USER': 'dakuser',
+        'USER': 'dakuser_1',
         'PASSWORD': 'dak',
         'HOST': 'localhost'
     }
