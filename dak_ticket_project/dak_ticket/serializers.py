@@ -1,13 +1,13 @@
 from rest_framework import serializers
-from .models import Event, Venue , CustomUser
+from .models import Event, Venue 
 
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     venue = serializers.HyperlinkedRelatedField(
-        view_name='venue_detail',  # Assuming this is the name of your venue detail URL pattern
+        view_name='venue_detail',  
         many=False,
-        read_only=True  # Assuming you don't want to allow writing to the venue field directly
+        read_only=True  
     )
 
     class Meta:
@@ -16,9 +16,9 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
 
 class VenueSerializer(serializers.HyperlinkedModelSerializer):
     event = serializers.HyperlinkedRelatedField(
-        view_name='event_detail',  # Assuming this is the name of your event detail URL pattern
+        view_name='event_detail', 
         many=True,
-        read_only=True  # Assuming you don't want to allow writing to the event field directly
+        read_only=True  
     )
 
     class Meta:
@@ -26,8 +26,3 @@ class VenueSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'name', 'address', 'state', 'city', 'zip', 'capacity', 'photo_url')
 
 
-        
-class CustomUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = ['id', 'email', 'first_name', 'last_name', 'is_active', 'is_staff']

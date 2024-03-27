@@ -72,7 +72,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173"
 ]
 ROOT_URLCONF = 'dak_ticket_django.urls'
-AUTH_USER_MODEL = 'dak_ticket.CustomUser'
+# AUTH_USER_MODEL = 'dak_ticket.CustomUser'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
