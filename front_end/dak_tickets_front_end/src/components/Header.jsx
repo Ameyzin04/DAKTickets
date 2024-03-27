@@ -1,7 +1,18 @@
+
 import Nav from './Nav'
+import { useNavigate } from 'react-router-dom'
 import '../styles/Template.css'
 
 export default function Header() {
+    
+    const navigate = useNavigate()
+
+    const handleSearch = () => {
+        const searchQuery = document.getElementById('home_Search_inputs').value 
+        navigate(`/searchresult/${searchQuery}`)
+    } 
+
+
     return (
         <div className="header-container">
             <div className="logo-container">
@@ -18,15 +29,16 @@ export default function Header() {
                 <Nav />
             </div>
             <div className="search-container">
-            <input className='home-search-inputs' 
+                <input className='home-search-inputs' 
                     id='home_Search_inputs'
-                   type="text"
-                   placeholder='Seacrh by Venue, Sports Team or Artist'  />
-            <button className='search-button'
+                    type="text"
+                    placeholder='Search by Venue, Sports Team or Artist' />
+                <button className='search-button'
                     id='home_search_button'
-                    type="button">
-                    SEARCH</button>
-              
+                    type="button"
+                    onClick={handleSearch}>
+                    SEARCH
+                </button>
             </div>
         </div>
     )

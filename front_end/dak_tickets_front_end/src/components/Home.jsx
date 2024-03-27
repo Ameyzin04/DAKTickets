@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
+=======
+// import "../style/Home.css";
+// import '../style/Home'
+>>>>>>> 5fee6a60cec6a0f12c229675338a2f1e0bf1897c
 
 const Home = () => {
   const [events, setEvents] = useState([]);
