@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-const Login = ({ setLoggedIn ,setUsername,setUserId }) => {
+import { useNavigate, Link } from 'react-router-dom';
+import Nav from './Nav';
+const Login = () => {
     const [user, setUser] = useState({
         username: '',
         password: '',
@@ -9,6 +9,7 @@ const Login = ({ setLoggedIn ,setUsername,setUserId }) => {
     });
 
     const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(false); // Add a state for login status
     
 
     const handleChange = (e) => {
@@ -20,28 +21,23 @@ const Login = ({ setLoggedIn ,setUsername,setUserId }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
+        const { username, password } = user; // Destructure username and password
         try {
-            const response = await fetch('http://localhost:8000/api/login', {
+            const response = await fetch('http://localhost:8000/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    username: user.username,
-                    password: user.password,
-                }),
+                body: JSON.stringify({ username, password }), // Use destructured values
             });
             if (!response.ok) {
                 throw new Error('Login failed');
             }
-          
+    
             const data = await response.json(); // Parse the response JSON data
             alert('Login successful');
-            setLoggedIn(true); // Call setLoggedIn here
-            setUsername(user.username); // Use user.username
-            setUserId(data.user_id); // Use the user ID from the response
-            localStorage.setItem('user_id', data.user_id);
-             localStorage.setItem('username', user.username);
+            setLoggedIn(true); // Set login status to true
             navigate('/'); // Navigate to the home page
         } catch (error) {
             console.error('Error logging in:', error.message);
@@ -58,37 +54,41 @@ const Login = ({ setLoggedIn ,setUsername,setUserId }) => {
         });
     };
 
-    return (
-        <div className="login-page-container">
-            <div className="form">
-                <h1>Login</h1>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        id="username"
-                        value={user.username}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="username">Username</label>
+   // Inside the Login component
+// Inside the Login component
+return (
+    <div className="login-page-container">
+        <div className="form">
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Username"
+                    id="username"
+                    value={user.username}
+                    onChange={handleChange}
+                />
+                <label htmlFor="username">Username</label>
 
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        id="password"
-                        value={user.password}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    placeholder="Password"
+                    id="password"
+                    value={user.password}
+                    onChange={handleChange}
+                />
+                <label htmlFor="password">Password</label>
 
-                    <button type="submit">Login</button>
-                    <button type="button" className="cancel" onClick={handleCancel}>
-                        Cancel
-                    </button>
-                </form>
-            </div>
+                <button type="submit">Login</button>
+                <button type="button" className="cancel" onClick={handleCancel}>
+                    Cancel
+                </button>
+            </form>
         </div>
-    );
+        <Nav loggedIn={loggedIn} username={user.username} setLoggedIn={setLoggedIn} />
+    </div>
+);
+
 };
 
 export default Login;

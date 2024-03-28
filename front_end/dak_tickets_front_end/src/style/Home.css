@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    position: relative;
+    background-color: #f1f1f1;
+    min-height: 100vh;
+  }
+
+  .home-page-container {
+    font-family:  Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    margin: auto;
+    padding-bottom: 100px;
+    }
+    .home-random-event-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        background-color: white;
+        margin-bottom: 10px;
+        }
+            .home-random-cards-container {
+                display: flex;
+                flex: row;
+                justify-content: space-around;
+                margin: 0 auto;
+                width: 70%;
+            }
+            .home-random-event-icon-image {
+                max-height: 50px;
+            }
+            .home-random-venues-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+                background-color: white;
+                margin-bottom: 10px;
+                }
+                    .home-random-cards-container {
+                        display: flex;
+                        flex: row;
+                        justify-content: space-around;
+                        margin: 0 auto;
+                        width: 70%;
+                    }
+                    .home-random-venues-icon-image {
+                        max-height: 50px;
+                    }.home-random-cards-container {
+                        display: flex;
+                        gap: 10px; 
+                      }
+                      
+                      .home-event-card {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        cursor: pointer;
+                      }
+                      
+                      .home-event-card img {
+                        width: 150px;
+                        height: 100px;
+                        border: none;
+                      }
