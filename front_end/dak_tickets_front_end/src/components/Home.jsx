@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../style/Home.css";
+// import "../style/Home.css";
+// import '../style/Home'
 
 
 export default function Home() {

@@ -6,6 +6,7 @@ import Registration from './Registration'
 import Concert from './Concert'
 import Tickets from './Tickets'
 import Sport from './Sport'
+import SearchResult from "./SearchResult"
 
 
 export default function Main(){
@@ -15,6 +16,7 @@ export default function Main(){
                 <Route path="/" element={<Home />}/>
                 <Route path="/login" element={<Login />}/>
                 <Route path="/registration" element={<Registration />}/>
+                <Route path="/searchresult/:searchContent" element={<SearchResult />}/>
                 <Route path="/concert" element={<Concert/>} />
                 <Route path="/sport" element={<Sport/>}/>
                 <Route path="/tickets" element={<Tickets/>}/>
