@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import Nav from './Nav';
+
 const Login = () => {
     const [user, setUser] = useState({
         username: '',
         password: '',
-      
     });
 
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(false); // Add a state for login status
-    
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const handleChange = (e) => {
         setUser({
@@ -38,57 +38,58 @@ const Login = () => {
             const data = await response.json(); // Parse the response JSON data
             alert('Login successful');
             setLoggedIn(true); // Set login status to true
+            localStorage.setItem('username', username);
+            console.log(loggedIn)
+            localStorage.setItem('setLoggedIn', 'true'); // Store login status in local storage
+            localStorage.setItem('loggedIn', 'true'); // Store login status in local storage
+            console.log(localStorage.getItem('username'))
+
             navigate('/'); // Navigate to the home page
         } catch (error) {
             console.error('Error logging in:', error.message);
             alert('Login failed');
         }
     };
-    
 
     const handleCancel = () => {
         setUser({
             username: '',
             password: '',
-            
         });
     };
 
-   // Inside the Login component
-// Inside the Login component
-return (
-    <div className="login-page-container">
-        <div className="form">
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    id="username"
-                    value={user.username}
-                    onChange={handleChange}
-                />
-                <label htmlFor="username">Username</label>
+    return (
+        <div className="login-page-container">
+            <div className="form">
+                <h1>Login</h1>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        id="username"
+                        value={user.username}
+                        onChange={handleChange}
+                    />
+                    <label htmlFor="username">Username</label>
 
-                <input
-                    type="password"
-                    placeholder="Password"
-                    id="password"
-                    value={user.password}
-                    onChange={handleChange}
-                />
-                <label htmlFor="password">Password</label>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        id="password"
+                        value={user.password}
+                        onChange={handleChange}
+                    />
+                    <label htmlFor="password">Password</label>
 
-                <button type="submit">Login</button>
-                <button type="button" className="cancel" onClick={handleCancel}>
-                    Cancel
-                </button>
-            </form>
+                    <button type="submit">Login</button>
+                    <button type="button" className="cancel" onClick={handleCancel}>
+                        Cancel
+                    </button>
+                </form>
+            </div>
+            <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={user.username} />
         </div>
-        <Nav loggedIn={loggedIn} username={user.username} setLoggedIn={setLoggedIn} />
-    </div>
-);
-
+    );
 };
 
 export default Login;

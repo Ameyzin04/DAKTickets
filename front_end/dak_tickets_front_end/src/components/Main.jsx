@@ -24,10 +24,10 @@ export default function Main(){
     return(
         <div className="main-container">
                <div>
-        <Header
-  
-       
-        
+        <Header   loggedIn={loggedIn}
+          username={username}
+          setLoggedIn={setLoggedIn}
+ 
         />
       </div>
             <Routes>
