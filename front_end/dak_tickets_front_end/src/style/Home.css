@@ -32,7 +32,7 @@ body {
             .home-random-event-icon-image {
                 max-height: 50px;
             }
-            .home-random-venue-container {
+            .home-random-venues-container {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-around;
@@ -47,6 +47,22 @@ body {
                         margin: 0 auto;
                         width: 70%;
                     }
-                    .home-random-venue-icon-image {
+                    .home-random-venues-icon-image {
                         max-height: 50px;
-                    }
+                    }.home-random-cards-container {
+                        display: flex;
+                        gap: 10px; 
+                      }
+                      
+                      .home-event-card {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        cursor: pointer;
+                      }
+                      
+                      .home-event-card img {
+                        width: 150px;
+                        height: 100px;
+                        border: none;
+                      }
