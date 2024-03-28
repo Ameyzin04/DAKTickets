@@ -1,16 +1,13 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import '../styles/Template.css';
 
 export default function Nav() {
     const username = localStorage.getItem('username');
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true');
+    const loggedIn = localStorage.getItem('loggedIn') === 'true';
 
-    
     const handleSignOut = () => {
-        setLoggedIn(false);
-        localStorage.removeItem('loggedIn');
         localStorage.removeItem('username');
+        localStorage.removeItem('loggedIn');
+        window.location.reload(); // Refresh the page to update the UI
     };
 
     return (
