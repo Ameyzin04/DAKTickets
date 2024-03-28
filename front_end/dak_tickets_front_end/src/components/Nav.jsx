@@ -1,13 +1,20 @@
-import { Link } from 'react-router-dom'
-import '../styles/Template.css'
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import '../styles/Template.css';
 
-export default function Nav({ loggedIn,username,setLoggedIn }) { // Correctly destructure the loggedIn prop
-  
+export default function Nav() {
+    const [username, setUsername] = useState(localStorage.getItem('username'));
+    const [loggedIn,setLoggedIn] =useState( localStorage.getItem('loggedIn'));
+
+
     const handleSignOut = () => {
         setLoggedIn(false);
         localStorage.removeItem('username');
+        setUsername(null);
     };
 
+    
+console.log(loggedIn, username)
     return (
         <div className="nav-container">
             <div className='left-nav-panel'>
@@ -21,14 +28,11 @@ export default function Nav({ loggedIn,username,setLoggedIn }) { // Correctly de
                         </div>
             ): (
             <div className='right-nav-panel'>
-
                 <img className='userlogin-logo' src='./src/assets/userlogin.svg' alt="User Login Logo"></img>
-
-
                 <Link to='/login'>Login</Link>/
                 <Link to='/registration'>Registration</Link>
             </div>
                 )}
         </div>
-    )
+    );
 }
