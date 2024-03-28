@@ -10,7 +10,7 @@ export default function Concert () {
 
         
         try {
-            const response = await axios.get(`http://localhost:8000/api/event`)
+            const response = await axios.get(`http://localhost:8000/event/`)
             console.log(respnose.data)
             setConecrts (response.data)
             console.log(concerts)

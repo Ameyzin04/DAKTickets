@@ -40,9 +40,10 @@ const Login = () => {
             setLoggedIn(true); // Set login status to true
             localStorage.setItem('username', username);
             console.log(loggedIn)
-            localStorage.setItem('loggedIn', 'true'); // Store login status in local storage
             localStorage.setItem('setLoggedIn', 'true'); // Store login status in local storage
+            localStorage.setItem('loggedIn', 'true'); // Store login status in local storage
             console.log(localStorage.getItem('username'))
+
             navigate('/'); // Navigate to the home page
         } catch (error) {
             console.error('Error logging in:', error.message);
