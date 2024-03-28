@@ -21,7 +21,10 @@ export default function Nav({ loggedIn,username,setLoggedIn }) { // Correctly de
                         </div>
             ): (
             <div className='right-nav-panel'>
+
                 <img className='userlogin-logo' src='./src/assets/userlogin.svg' alt="User Login Logo"></img>
+
+
                 <Link to='/login'>Login</Link>/
                 <Link to='/registration'>Registration</Link>
             </div>

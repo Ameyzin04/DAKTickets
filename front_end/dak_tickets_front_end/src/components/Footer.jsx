@@ -13,7 +13,7 @@ export default function Footer() {
                 <div className="profile" id="ameyo">
                     Ameyo Kugbe 
                     <div><a href="https://github.com/amidmartinez"><img src={github}></img></a>
-                    <a href=""><img src={linkedin}></img></a></div>
+                    <a href="https://github.com/Ameyzin04"><img src={linkedin}></img></a></div>
                 </div>
                 <div className="profile" id="kevin">
                     Kevin Wang

@@ -7,8 +7,12 @@ import Concert from './Concert'
 import Tickets from './Tickets'
 import Sport from './Sport'
 import SearchResult from "./SearchResult"
+
 import Header from "./Header"
 import { useState } from "react";
+
+import '../styles/Template.css'
+
 
 export default function Main(){
 
