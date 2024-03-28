@@ -7,6 +7,7 @@ import Concert from './Concert'
 import Tickets from './Tickets'
 import Sport from './Sport'
 import SearchResult from "./SearchResult"
+import '../styles/Template.css'
 
 
 export default function Main(){

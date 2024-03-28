@@ -13,7 +13,7 @@ export default function Nav() {
                 <Link to='/sport'>Sport</Link>
             </div>
             <div className='right-nav-panel'>
-                <img className='userlogin-logo' src='./src/assets/userlogin.svg'></img>
+                <img className='userlogin-logo' src='./src/assets/circle-user-solid.svg'></img>
                 <Link to='/login'>Login</Link>/
                 <Link to='/registration'>Registration</Link>
             </div>

@@ -22,7 +22,7 @@ class Event(models.Model):
     type = models.CharField(max_length=100, choices=EVENT_TYPES)
     duration = models.CharField(max_length=100)
     photo_url = models.URLField()
-    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE,related_name='events', default=None)
     description = models.CharField(max_length=100, default='')
     
     def __str__(self):
